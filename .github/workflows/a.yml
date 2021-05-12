@@ -7,6 +7,8 @@ jobs:
     outputs:
       salad: ${{ steps.step1.outputs.fruit }}
     steps:
+      - id: setup
+        uses: actions/checkout@v2
       - id: step1
         uses: ./
         with:
