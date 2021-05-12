@@ -1,0 +1,30 @@
+name: 'apple'
+description: '?'
+author: 'jsoref'
+branding:
+  icon: 'edit-3'
+  color: 'yellow'
+inputs:
+  tool:
+    description: "tool"
+    default: ""
+    required: false
+
+outputs:
+  chain:
+    description: "chain"
+    value: "steps.write_output.outputs.fruit"
+    
+
+runs:
+  using: 'composite'
+  steps:
+    - id: show_input
+      run: echo "input ${{inputs.tool}}"
+      shell: bash
+    - id: write_output
+      run: echo "::set-output name=fruit::peach"
+      shell: bash
+    - id: show_input_and_output
+      run: echo "input ${{inputs.tool}} ${{steps.write_output.outputs.fruit}}"
+      shell: bash

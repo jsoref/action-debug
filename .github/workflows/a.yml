@@ -5,13 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     # Map a step output to a job output
     outputs:
-      output1: ${{ steps.step1.outputs.test }}
-      output2: ${{ steps.step2.outputs.test }}
+      salad: ${{ steps.step1.outputs.fruit }}
     steps:
       - id: step1
-        run: echo "::set-output name=test::hello"
+        uses: ./
+        with:
+          tool: "fork"
       - id: step2
-        run: echo "::set-output name=test::world"
+        run: echo "::set-output name=output1::${{steps.step1.outputs.chain}}"
   job2:
     runs-on: ubuntu-latest
     needs: job1
